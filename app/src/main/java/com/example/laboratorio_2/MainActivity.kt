@@ -17,31 +17,31 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            Laboratorio_2Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        setContent{
+            MyTexts()
+            //Esta funcion composable se encarga de mostrar en pantalla el texto
         }
+
     }
 }
 
+//Esta funcion contruye la interfaz de usuario
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun MyTexts(){
+    //Dentro usa otra funcion que permite mostrar el texto
+    MyText("Hola Mundo")
+    MyText("Prueba de Compose")
+}
+//Esta funci[on permite que sea reutilizable para mostrar texto
+@Composable
+fun MyText(text: String){
+    Text(text)
+
 }
 
-@Preview(showBackground = true)
+//Permite vizualizar el texto de la funcion My texts sin tener que emularlo
+@Preview
 @Composable
-fun GreetingPreview() {
-    Laboratorio_2Theme {
-        Greeting("Android")
-    }
+fun PreviewText(){
+    MyTexts()
 }
