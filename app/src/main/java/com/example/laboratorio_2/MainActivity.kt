@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -15,30 +16,48 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.laboratorio_2.ui.theme.Laboratorio_2Theme
+import androidx.compose.ui.text.style.TextAlign
+
+import androidx.compose.ui.unit.dp
+import com.example.laboratorio_2.R
+
+
+
+
+import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent{
-            MyImage()
-            MyTexts()
-            //Esta funcion composable se encarga de mostrar en pantalla el texto
+            MyComponent()
+            //Esta funcion composable se encarga de mostrar en pantalla todos los elementos estruxturados en MyComponent()
         }
 
     }
 }
-
-
-
+//Funcion que permite construir la interfaz de usuario
 @Composable
-fun MyImage(){
+fun MyComponent(){
+    Row(){
+
+        MyImage()
+        MyTexts()
+    }
+
+}
+
+//Funcion que permite mostrar la imagen
+@Composable
+ fun MyImage(){
     Image(
+        //Muestra imagen de icono de android que se encuentra en la carpeta de recursos drawable
         painterResource(R.drawable.ic_launcher_foreground),"Imagen de prueba")
 
 }
 
-//Esta funcion contruye la interfaz de usuario
+//Esta funcion permite establecer que textos mostrar
 @Composable
 fun MyTexts(){
     Column() {
@@ -47,17 +66,17 @@ fun MyTexts(){
         MyText("Prueba de Compose")
     }
 }
-//Esta funci[on permite que sea reutilizable para mostrar texto
+//Esta funcion permite que sea reutilizable para mostrar texto
 @Composable
 fun MyText(text: String){
-    Text(text)
+    // Crea un elemento de texto en la interfaz de usuario con las modificaciones de centrar y tamaño de fuente
+    Text(text, textAlign = TextAlign.Center, modifier = Modifier.padding(16.dp))
 
 }
 
-//Permite vizualizar el texto de la funcion My texts sin tener que emularlo
+//Permite vizualizar todos los componentes de la interfaz sin emular los cambios
 @Preview
 @Composable
 fun PreviewText(){
-    MyImage()
-    MyTexts()
+    MyComponent()
 }
